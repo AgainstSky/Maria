@@ -13,14 +13,21 @@ namespace sky {
         byte *_memory;
         uint_32 _size;
         bool _inited;
+
+    public:
         Memory(uint_32 size) : _size(size) {
             _memory = (byte *) malloc(size * sizeof(byte));
             _inited = true;
         }
-    public:
-        void writeByte(uint_32 pos,byte data) override;
-        void writeWord(uint_32 pos,word data) override;
+
+        ~Memory() { free(_memory); }
+
+        void writeByte(uint_32 pos, byte data) override;
+
+        void writeWord(uint_32 pos, word data) override;
+
         void writeFloat(uint_32 pos, float data) override;
+
         float readFloat(uint_32 pos) override;
     };
 }

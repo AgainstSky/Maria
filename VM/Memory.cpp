@@ -16,17 +16,12 @@ namespace sky {
     }
 
     void Memory::writeFloat(uint_32 pos, float data) {
-        byte *b = (byte *) &data;
-        for (int i = 0; i < sizeof(data); i++) {
-            _memory[pos + 1] = b[i];
-        }
+        auto temp =(float *) _memory;
+        temp[pos/4] = data;
     }
 
     float Memory::readFloat(uint_32 pos) {
-        float result = 0;
-        byte *b = (byte*)&result;
-        b[0] = _memory[pos+1];
-
-        return 0;
+        auto temp =(float *) _memory;
+        return temp[pos/4];
     }
 }
