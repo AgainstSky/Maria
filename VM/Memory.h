@@ -15,16 +15,20 @@ namespace sky {
         bool _inited;
 
     public:
-        Memory(uint_32 size) : _size(size) {
+        explicit Memory(uint_32 size) : _size(size) {
             _memory = (byte *) malloc(size * sizeof(byte));
             _inited = true;
         }
 
-        ~Memory() { free(_memory); }
+        ~Memory() override { free(_memory); }
 
         void writeByte(uint_32 pos, byte data) override;
 
+        byte readByte(uint_32 pos) override;
+
         void writeWord(uint_32 pos, word data) override;
+
+        word readWord(uint_32 pos) override;
 
         void writeFloat(uint_32 pos, float data) override;
 
